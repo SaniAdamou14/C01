@@ -10,8 +10,8 @@ if [ $# -ne 3 ]; then
     exit 1
 fi
 
-# Vérification si les deux premiers arguments sont des nombres
-if ! [[ "$1" =~ ^[0-9]+$ && "$2" =~ ^[0-9]+$ ]]; then
+# Vérification si les deux premiers arguments sont des nombres (y compris négatifs)
+if ! [[ "$1" =~ ^-?[0-9]+$ && "$2" =~ ^-?[0-9]+$ ]]; then
     echo "Erreur : Les deux premiers arguments doivent être des nombres entiers."
     exit 1
 fi
@@ -32,7 +32,7 @@ case "$3" in
             echo "Erreur : Division par zéro."
             exit 1
         fi
-        result=$(( $1 / $2 ))
+        result=$(bc <<< "$1 / $2")  # Division flottante pour plus de précision
         ;;
     *)
         echo "Erreur : Opérateur invalide. Utilisez +, -, * ou /."

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script : count_files.sh
-# Objectif : Compte le nombre de fichiers dans un répertoire donné en argument
+# Objectif : Compte le nombre de fichiers (non répertoires) dans un dossier
 # Auteur : Mahamane Sani Adamou Mahamane
 
 # Vérification du nombre d'arguments
@@ -16,8 +16,8 @@ if [ ! -d "$1" ]; then
     exit 1
 fi
 
-# Comptage des fichiers (uniquement les fichiers, pas les sous-répertoires)
-file_count=$(ls -l "$1" | grep ^- | wc -l)
+# Comptage des fichiers uniquement (pas de sous-répertoires)
+file_count=$(find "$1" -maxdepth 1 -type f | wc -l)
 
 # Affichage du résultat
 echo "Le dossier $1 contient $file_count fichier(s)."
