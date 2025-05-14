@@ -5,10 +5,10 @@
 # Auteur : Mahamane Sani Adamou Mahamane
 
 
-# Lit le nom du fichier
-read file  < /dev/tty
-# Lit la chaîne à rechercher
-read search  < /dev/tty
+# Lire le fichier
+read file
+# Lire la chaîne à rechercher
+read search
 
 # Vérifie que le fichier existe
 if [ ! -f "$file" ]; then
@@ -16,9 +16,9 @@ if [ ! -f "$file" ]; then
     exit 1
 fi
 
-# Recherche la chaîne
+# Utiliser grep pour rechercher la chaîne
 if grep -q "$search" "$file"; then
-    echo "La chaîne '$search' a été trouvée dans $file"
+    echo "La chaîne '$search' a été trouvée dans $file."
 else
-    echo "La chaîne '$search' n'a pas été trouvée dans $file"
+    echo "La chaîne '$search' n'a pas été trouvée dans $file."
 fi

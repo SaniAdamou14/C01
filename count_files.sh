@@ -5,17 +5,23 @@
 # Auteur : Mahamane Sani Adamou Mahamane
 
 
-# Attend l'entrée de l'utilisateur
-read folder  < /dev/tty
+# Lire le nom du dossier depuis l'entrée standard
+read folder
 
-# Vérifie que le dossier existe
+# Vérifier que le dossier existe
 if [ ! -d "$folder" ]; then
     echo "Le dossier $folder n'existe pas."
     exit 1
 fi
 
-# Compte les fichiers réguliers dans ce dossier
-count=$(ls -p "$folder" 2>/dev/null | grep -v / | wc -l)
+# Initialiser compteur
+count=0
 
-# Affiche le résultat demandé
-echo "Le dossier $folder contient $count fichier(s)"
+# Utiliser ls et une boucle pour compter les fichiers
+for item in "$folder"/*; do
+    if [ -f "$item" ]; then
+        count=$((count + 1))
+    fi
+done
+
+echo "Le dossier $folder contient $count fichier(s)."
