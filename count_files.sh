@@ -4,17 +4,17 @@
 # Objectif : Compter le nombre de fichiers réguliers dans un répertoire
 # Auteur : Mahamane Sani Adamou Mahamane
 
-
-# Lire le nom du dossier
+# recuperer le nom du dossier
 read folder
+ # compter le nombre de fichiers
+count=0
 
-# Vérifier l'existence
-if [ ! -d "$folder" ]; then
-    echo "Le dossier $folder n'existe pas."
-    exit 1
-fi
+# Boucle simple sur ls
+for item in $(ls "$folder"); do
+  if [ -f "$folder/$item" ]; then
+    count=$((count + 1))
+  fi
+done
 
-# Compter les fichiers (non cachés) avec ls|wc -l
-count=$(ls "$folder" 2>/dev/null | wc -l)
-
+# Afficher le résultat
 echo "Le dossier $folder contient $count fichier(s)."
