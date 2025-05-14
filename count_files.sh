@@ -5,23 +5,16 @@
 # Auteur : Mahamane Sani Adamou Mahamane
 
 
-# # Lire le nom du dossier depuis l'entrée standard
-# read folder
+# Lire le nom du dossier
+read folder
 
-# # Vérifier que le dossier existe
-# if [ ! -d "$folder" ]; then
-#     echo "Le dossier $folder n'existe pas."
-#     exit 1
-# fi
+# Vérifier l'existence
+if [ ! -d "$folder" ]; then
+    echo "Le dossier $folder n'existe pas."
+    exit 1
+fi
 
-# # Initialiser compteur
-# count=0
+# Compter les fichiers (non cachés) avec ls|wc -l
+count=$(ls "$folder" 2>/dev/null | wc -l)
 
-# # Utiliser ls et une boucle pour compter les fichiers
-# for item in "$folder"/*; do
-#     if [ -f "$item" ]; then
-#         count=$((count + 1))
-#     fi
-# done
-
-# echo "Le dossier $folder contient $count fichier(s)."
+echo "Le dossier $folder contient $count fichier(s)."
