@@ -4,10 +4,12 @@
 # Objectif : Affiche l'utilisation du disque pour un répertoire donné ou courant
 # Auteur : Mahamane Sani Adamou Mahamane
 
-# Affiche l'utilisation du disque pour tous les systèmes montés
-echo "Utilisation globale du disque :"
-df -h
+# Affiche l'utilisation du disque (espace global)
+echo "Utilisation du disque (globale) :"
+df -h 2>/dev/null || echo "Commande df non disponible."
 
-echo
-echo "Utilisation du répertoire courant :"
-du -sh . 2>/dev/null
+echo ""
+
+# Affiche l’utilisation du répertoire courant
+echo "Utilisation du disque (répertoire courant) :"
+du -sh . 2>/dev/null || echo "Commande du non disponible."

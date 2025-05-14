@@ -4,15 +4,15 @@
 # Objectif : Effectue une opération arithmétique sur deux nombres
 # Auteur : Mahamane Sani Adamou Mahamane
 
-# Vérifie qu'on a bien 3 arguments
+# Vérifie qu'on a bien trois arguments
 if [ $# -ne 3 ]; then
     echo "Usage: $0 <nombre1> <nombre2> <opérateur(+ - * /)>"
     exit 1
 fi
 
-num1=$1
-num2=$2
-op=$3
+num1="$1"
+num2="$2"
+op="$3"
 
 # Vérifie que les deux premiers sont des entiers
 if ! [[ "$num1" =~ ^-?[0-9]+$ ]] || ! [[ "$num2" =~ ^-?[0-9]+$ ]]; then
@@ -20,7 +20,7 @@ if ! [[ "$num1" =~ ^-?[0-9]+$ ]] || ! [[ "$num2" =~ ^-?[0-9]+$ ]]; then
     exit 2
 fi
 
-# Calcul en fonction de l’opérateur
+# Calcul selon l'opérateur
 case "$op" in
     +) result=$((num1 + num2)) ;;
     -) result=$((num1 - num2)) ;;
@@ -30,12 +30,10 @@ case "$op" in
             echo "Erreur : division par zéro."
             exit 3
         fi
-        result=$((num1 / num2))
-        ;;
+        result=$((num1 / num2)) ;;
     *)
-        echo "Erreur : opérateur non supporté. Utilisez +, -, *, /"
-        exit 4
-        ;;
+        echo "Erreur : opérateur invalide. Utilisez + - * /"
+        exit 4 ;;
 esac
 
 echo "Résultat : $result"
