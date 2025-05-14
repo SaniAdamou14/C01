@@ -5,8 +5,8 @@
 # Auteur : Mahamane Sani Adamou Mahamane
 
 
-# Attend l'entrée de l'utilisateur (sans prompt)
-read folder
+# Attend l'entrée de l'utilisateur
+read folder  < /dev/tty
 
 # Vérifie que le dossier existe
 if [ ! -d "$folder" ]; then
@@ -14,8 +14,8 @@ if [ ! -d "$folder" ]; then
     exit 1
 fi
 
-# Compte les fichiers réguliers dans ce dossier (sans sous-dossiers)
+# Compte les fichiers réguliers dans ce dossier
 count=$(ls -p "$folder" 2>/dev/null | grep -v / | wc -l)
 
 # Affiche le résultat demandé
-echo "Le dossier $folder contient $count fichier(s)."
+echo "Le dossier $folder contient $count fichier(s)"
