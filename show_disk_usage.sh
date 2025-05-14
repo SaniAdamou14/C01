@@ -1,22 +1,13 @@
 #!/bin/bash
 
 # Script : show_disk_usage.sh
-# Objectif : Affiche l'utilisation du disque pour un répertoire
+# Objectif : Affiche l'utilisation du disque pour un répertoire donné ou courant
 # Auteur : Mahamane Sani Adamou Mahamane
 
-# Si un répertoire est fourni, l'utiliser, sinon utiliser le répertoire courant
-if [ $# -eq 1 ]; then
-    target_dir="$1"
-else
-    target_dir="."
-fi
+# Affiche l'utilisation du disque pour tous les systèmes montés
+echo "Utilisation globale du disque :"
+df -h
 
-# Vérification si le répertoire existe
-if [ ! -d "$target_dir" ]; then
-    echo "Erreur : Le répertoire '$target_dir' n'existe pas."
-    exit 1
-fi
-
-# Affichage de l'utilisation du disque
-echo "Utilisation du disque pour $target_dir :"
-df -h "$target_dir"
+echo
+echo "Utilisation du répertoire courant :"
+du -sh . 2>/dev/null

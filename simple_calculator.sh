@@ -4,42 +4,38 @@
 # Objectif : Effectue une opération arithmétique sur deux nombres
 # Auteur : Mahamane Sani Adamou Mahamane
 
-# Vérification du nombre d'arguments
+# Vérifie qu'on a bien 3 arguments
 if [ $# -ne 3 ]; then
-    echo "Usage : $0 <nombre1> <nombre2> <opérateur>"
+    echo "Usage: $0 <nombre1> <nombre2> <opérateur(+ - * /)>"
     exit 1
 fi
 
-# Vérification si les deux premiers arguments sont des nombres (y compris négatifs)
-if ! [[ "$1" =~ ^-?[0-9]+$ && "$2" =~ ^-?[0-9]+$ ]]; then
-    echo "Erreur : Les deux premiers arguments doivent être des nombres entiers."
-    exit 1
+num1=$1
+num2=$2
+op=$3
+
+# Vérifie que les deux premiers sont des entiers
+if ! [[ "$num1" =~ ^-?[0-9]+$ ]] || ! [[ "$num2" =~ ^-?[0-9]+$ ]]; then
+    echo "Erreur : les deux premiers arguments doivent être des entiers."
+    exit 2
 fi
 
-# Vérification de l'opérateur
-case "$3" in
-    "+")
-        result=$(( $1 + $2 ))
-        ;;
-    "-")
-        result=$(( $1 - $2 ))
-        ;;
-    "*")
-        result=$(( $1 * $2 ))
-        ;;
-    "/")
-        if [ $2 -eq 0 ]; then
-            echo "Erreur : Division par zéro."
-            exit 1
+# Calcul en fonction de l’opérateur
+case "$op" in
+    +) result=$((num1 + num2)) ;;
+    -) result=$((num1 - num2)) ;;
+    \*) result=$((num1 * num2)) ;;
+    /)
+        if [ "$num2" -eq 0 ]; then
+            echo "Erreur : division par zéro."
+            exit 3
         fi
-        result=$(bc <<< "$1 / $2")  # Division flottante pour plus de précision
+        result=$((num1 / num2))
         ;;
     *)
-        echo "Erreur : Opérateur invalide. Utilisez +, -, * ou /."
-        exit 1
+        echo "Erreur : opérateur non supporté. Utilisez +, -, *, /"
+        exit 4
         ;;
 esac
 
-# Affichage du résultat
 echo "Résultat : $result"
-exit 0

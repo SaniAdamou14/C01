@@ -4,19 +4,15 @@
 # Objectif : Affiche chaque argument passé au script ligne par ligne
 # Auteur : Mahamane Sani Adamou Mahamane
 
-# Vérification si des arguments sont passés
+# Vérifie qu’au moins un argument est passé
 if [ $# -eq 0 ]; then
-    echo "Aucun argument fourni."
+    echo "Usage: $0 <arg1> [arg2] [...]"
     exit 1
 fi
 
-# Compteur pour numéroter les arguments
-count=1
-
-# Boucle sur tous les arguments avec $@
+# Affiche chaque argument ligne par ligne
+i=1
 for arg in "$@"; do
-    echo "Argument $count: $arg"
-    ((count++))
+    echo "Argument $i: $arg"
+    ((i++))
 done
-
-exit 0

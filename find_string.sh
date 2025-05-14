@@ -1,32 +1,28 @@
 #!/bin/bash
 
 # Script : find_string.sh
-# Objectif : Recherche une chaîne dans un fichier (traitement littéral)
+# Objectif : Rechercher une chaîne littérale dans un fichier
 # Auteur : Mahamane Sani Adamou Mahamane
 
-# Vérification du nombre d'arguments
+
+# Vérifie qu'on a bien deux arguments : fichier et chaîne
 if [ $# -ne 2 ]; then
-    echo "Usage : $0 <fichier> <chaîne>"
+    echo "Usage: $0 <nom_du_fichier> <chaine>"
     exit 1
 fi
 
-# Vérification si le fichier existe
-if [ ! -f "$1" ]; then
-    echo "Erreur : Le fichier '$1' n'existe pas."
-    exit 1
+file=$1
+search=$2
+
+# Vérifie si le fichier existe
+if [ ! -f "$file" ]; then
+    echo "Erreur : fichier $file non trouvé."
+    exit 2
 fi
 
-# Vérification si le fichier est lisible
-if [ ! -r "$1" ]; then
-    echo "Erreur : Le fichier '$1' n'est pas lisible."
-    exit 1
-fi
-
-# Recherche de la chaîne avec grep -F (traitement littéral)
-if grep -qF "$2" "$1"; then
-    echo "La chaîne '$2' a été trouvée dans $1."
+# Recherche la chaîne
+if grep -q "$search" "$file"; then
+    echo "La chaîne '$search' a été trouvée dans $file."
 else
-    echo "La chaîne '$2' n'a pas été trouvée dans $1."
+    echo "La chaîne '$search' n'a pas été trouvée dans $file."
 fi
-
-exit 0
